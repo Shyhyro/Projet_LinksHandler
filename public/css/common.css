@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 62.5%;
+}
+
+/* ---- Font awesome i ---- */
+i {
+    font-size: 40px;
+}
+
+/* ---- Container ---- */
+#container {
+    font-family: "Comic Sans MS", sans-serif;
+    padding: 20px 70px;
+    font-size: 1rem;
+    height: 100%;
+    width: 100%;
+}
+
+#littleBody {
+    padding: 100px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* ---- Header ---- */
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#account {
+    background-color: orange;
+    border-radius: 25px;
+}
+
+.linkImage {
+    margin-bottom: 30px;
+    width: 300px;
+    height: 300px;
+}
+
+.image img {
+    border: solid 4px grey;
+    height: 250px;
+    width: 100%;
+}
+
+.linkName {
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -9px;
+    height: 50px;
+    width: 100%;
+    border: solid 4px steelblue;
+}
+
+.linkName:hover {
+    cursor: pointer;
+    background-color: lightblue;
+}
+
+/* ---- Reset ---- */
+a {
+    text-decoration: none;
+    color: steelblue;
+}
+
+a:hover {
+    cursor: pointer;
+    color: darkred;
+}
