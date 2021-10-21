@@ -1,14 +1,12 @@
 <div id="littleBody">
     <div id="registration">
-        <form name="registration">
-            Nom:
-            <input type="text" maxlength="40" required>
-            Prénom:
-            <input type="text" maxlength="40" required>
+        <form name="login" method="post" action="index.php?controller=user&action=login&error=0">
+            <h2>Connexion</h2>
             Mail:
-            <input type="email" maxlength="100" required>
+            <input name="mail" type="email" maxlength="100" required>
             Password:
-            <input type="password" required>
+            <input name="pass" type="password" required>
+            <button type="submit">Connexion</button>
         </form>
     </div>
 </div>

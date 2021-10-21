@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 use Bosqu\ProjetLinksHandler\Controller\HomeController;
 
@@ -18,7 +19,7 @@ if(isset($_GET['controller'])) {
                 $reflexion =  new ReflectionClass($controller);
 
                 if($reflexion->hasMethod($action)) {
-                    $controller->action();
+                    $controller->$action();
                 }
                 else {
                     $controller->home();

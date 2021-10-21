@@ -10,7 +10,7 @@ body {
 
 /* ---- Font awesome i ---- */
 i {
-    font-size: 40px;
+    font-size: 45px;
 }
 
 /* ---- Container ---- */
@@ -67,6 +67,17 @@ header {
 .linkName:hover {
     cursor: pointer;
     background-color: lightblue;
+}
+
+#registration form {
+    display: flex;
+    flex-direction: column;
+}
+
+#registration {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 /* ---- Reset ---- */

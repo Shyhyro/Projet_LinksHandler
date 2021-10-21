@@ -13,12 +13,24 @@
 <body>
 <div id="container">
     <header>
-        <div id="newLink">
-            <a href="#"><i class="fas fa-plus-square"></i> Ajouter un lien</a>
-        </div>
-        <div id="account">
-            <a href="#"><i class="fas fa-user-circle"></i></a>
-        </div>
+        <?php
+        if (isset($_SESSION['key']))
+        {
+        ?>
+            <div id="newLink">
+                <a href="/index.php?controller=links&action=newlink"><i class="fas fa-plus-square"></i> Ajouter un lien</a>
+            </div>
+            <div><h1>Links Handler</h1></div>
+            <div id="account">
+                <a href="/index.php?controller=user&action=logout"><i class="fas fa-portrait"></i></a>
+            </div>
+        <?php
+        }
+        else
+        {
+            echo "<div><h1>Links Handler</h1></div>";
+        }
+        ?>
     </header>
     <?=$html?>
 </div>
