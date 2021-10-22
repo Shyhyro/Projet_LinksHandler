@@ -127,4 +127,9 @@ class UserController extends Controller
             header("location:/index.php?error=noSession");
         }
     }
+
+    public function home()
+    {
+        $this->render("user.view.php", "Options");
+    }
 }

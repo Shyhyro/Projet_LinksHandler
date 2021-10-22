@@ -22,7 +22,7 @@
             </div>
             <div><h1>Links Handler</h1></div>
             <div id="account">
-                <a href="/index.php?controller=user&action=logout"><i class="fas fa-portrait"></i></a>
+                <a href="/index.php?controller=user"><i class="fas fa-portrait"></i></a>
             </div>
         <?php
         }

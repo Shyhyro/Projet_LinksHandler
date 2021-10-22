@@ -62,4 +62,26 @@ class LinksController extends Controller
             header("location:/index.php?error=noSession");
         }
     }
+
+    public function remove()
+    {
+        if (isset($_SESSION['key'], $_GET['id']))
+        {
+            $link = strip_tags(trim($_GET['id']));
+            $linkManager = new LinksManager();
+            $linkManager = $linkManager->removeLink($link);
+            if ($linkManager)
+            {
+                header("location:/index.php?controller=user&statut=delete");
+            }
+            else
+            {
+                header("location:/index.php?controller=user&error=errorIsComing");
+            }
+        }
+        else
+        {
+            header("location:/index.php?controller=user&error=dataMissing");
+        }
+    }
 }

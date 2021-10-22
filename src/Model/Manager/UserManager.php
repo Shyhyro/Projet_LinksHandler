@@ -45,4 +45,25 @@ class UserManager
 
         return $stmt->execute();
     }
+
+    /**
+     * Search a user by her Id
+     * @param $id
+     * @return User
+     */
+    public function searchUserById($id): ?User
+    {
+        $stmt = Database::getInstance()->prepare("SELECT * FROM prefix_user WHERE id = :id LIMIT 1");
+        $stmt->bindValue(":id", $id);
+        $state = $stmt->execute();
+        if ($state && $userData = $stmt->fetch())
+        {
+            $user = new User($userData['id'], $userData['nom'], $userData['prenom'], $userData['mail'], $userData['pass']);
+        }
+        else
+        {
+            $user = null;
+        }
+        return $user;
+    }
 }

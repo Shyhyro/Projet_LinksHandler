@@ -15,4 +15,5 @@
             <button type="submit">Ajouter</button>
         </form>
     </div>
+    <a href="/index.php?controller=links">Retour</a>
 </div>
