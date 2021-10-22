@@ -7,8 +7,8 @@ class Controller
     public function render(string $view, string $tittle, array $data = null)
     {
         ob_start();
-        require dirname(__FILE__) . "/../../View/$view";
+        require dirname(__FILE__) . "/../../view/$view";
         $html = ob_get_clean();
-        require dirname(__FILE__) . "/../../View/_partials/base.view.php";
+        require dirname(__FILE__) . "/../../view/_partials/base.view.php";
     }
 }

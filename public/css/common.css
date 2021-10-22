@@ -91,17 +91,25 @@ header {
     margin: 10px 0;
 }
 
-/* ---- Reset ---- */
+tr:hover {
+    background-color: lightblue;
+}
+
+/* ---- Reset / input / button ---- */
 a {
     text-decoration: none;
     color: steelblue;
 }
 
+button {
+    margin: 10px 0;
+}
+
+button, input {
+    padding: 10px;
+}
+
 a:hover, button:hover {
     cursor: pointer;
     color: darkred;
-}
-
-tr:hover {
-    background-color: lightblue;
 }

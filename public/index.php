@@ -1,9 +1,14 @@
 <?php
-session_start();
+
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 use Bosqu\ProjetLinksHandler\Controller\HomeController;
 
 require '../vendor/autoload.php';
+
+session_start();
+
 
 if(isset($_GET['controller'])) {
     $controller = ucfirst(filter_var($_GET['controller'], FILTER_SANITIZE_STRING)) . "Controller";
