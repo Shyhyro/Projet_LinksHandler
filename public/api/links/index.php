@@ -15,7 +15,9 @@ switch($requestType)
     // Obtention d'informations.
     case 'POST':
         addLink(json_decode(file_get_contents("php://input")));
-        //echo getAll($manager);
+        break;
+    case 'GET':
+        echo getAll($manager);
         break;
     default:
         break;

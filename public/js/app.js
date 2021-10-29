@@ -2,15 +2,6 @@
 let form = document.querySelector('#link-add-form form');
 let submitButton = form.querySelector('button[type="submit"]');
 
-/**
- * Ajout d'un lien en base de données.
- */
-// Affichage du form d'ajout d'un lien.
-document.getElementById('link-add-button').addEventListener('click', function()
-{
-    form.parentElement.style.display = 'block';
-});
-
 // Sending form.
 submitButton.addEventListener('click', function(e)
 {
@@ -57,14 +48,21 @@ submitButton.addEventListener('click', function(e)
 /**
  * Récupération de la liste au click du bouton.
  */
-let linksListButton = document.getElementById('links-list');
-linksListButton.addEventListener('click', function(e)
+function actualisation ()
 {
     let xhr = new XMLHttpRequest();
+    xhr.responseType = "json";
+    xhr.open('GET', '/api/links/index.php');
+
     xhr.onload = function()
     {
+        console.log(1);
         const links = JSON.parse(xhr.responseText);
-        const table = document.querySelector('#link-list-content');
+
+        //xhr.open('GET', '/api/links/index.php');
+        //xhr.send();
+
+        const table = document.getElementById('littleBody');
         table.innerHTML = '';
 
         for(let link of links)
@@ -76,10 +74,7 @@ linksListButton.addEventListener('click', function(e)
                 </div>
             `;
         }
-
-        table.parentElement.style.display = 'table';
     };
+}
 
-    xhr.open('GET', '/api/links/index.php');
-    xhr.send();
-});
+actualisation();
