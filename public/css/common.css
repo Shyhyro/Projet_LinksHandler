@@ -46,9 +46,13 @@ header {
     height: 300px;
 }
 
-.image img {
-    border: solid 4px grey;
+.image {
+    border: solid 4px #B1D4E0;
     height: 250px;
+}
+
+.image img {
+    height: 100%;
     width: 100%;
 }
 
@@ -58,23 +62,23 @@ header {
     justify-content: center;
     align-items: center;
     position: relative;
-    top: -9px;
+    top: -5px;
     height: 50px;
     width: 100%;
-    border: solid 4px steelblue;
+    border: solid 4px #145DA0;
 }
 
 .linkName:hover {
     cursor: pointer;
-    background-color: lightblue;
+    background-color: rgba(177, 212, 224, 0.6);
 }
 
-#registration form {
+.registration form {
     display: flex;
     flex-direction: column;
 }
 
-#registration {
+.registration {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -91,25 +95,84 @@ header {
     margin: 10px 0;
 }
 
+table td {
+    border: rgb(30, 30, 30) solid 1px;
+}
+
 tr:hover {
     background-color: lightblue;
+}
+
+.littleBorderForm {
+    padding: 25px;
+    margin: 25px;
+    border: solid #145DA0 2px;
 }
 
 /* ---- Reset / input / button ---- */
 a {
     text-decoration: none;
-    color: steelblue;
+    color: #145DA0;
 }
 
 button {
-    margin: 10px 0;
+    border: #B1D4E0 solid 2px;
+    border-radius: 10px;
+    background-color: #2E8BC0;
+    color: #FEFEFE;
+    margin: 5px 0;
 }
 
 button, input {
     padding: 10px;
 }
 
+button:hover {
+    background-color: #B1D4E0;
+}
+
 a:hover, button:hover {
     cursor: pointer;
-    color: darkred;
+    color: #0C2D48;
+}
+
+/* ---- Messages / Colors ---- */
+#message {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: rgb(30, 30, 30);
+    animation-duration: 6s;
+    animation-fill-mode: forwards;
+    animation-name: messageAnim;
+}
+
+.red {
+    color: red;
+    border: red solid 4px;
+}
+
+.orange {
+    color: orange;
+    border: orange solid 4px;
+}
+
+.green {
+    color: limegreen;
+    border: limegreen solid 4px;
+}
+
+/* ---- Animation ---- */
+@keyframes messageAnim {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
 }

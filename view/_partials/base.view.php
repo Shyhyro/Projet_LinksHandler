@@ -14,11 +14,63 @@
 <div id="container">
     <header>
         <?php
+        if (isset($_GET['error']))
+        {
+            $error = $_GET['error'];
+
+            switch ($error)
+            {
+                case 'errorIsComing':
+                    echo "<div id='message' class='red'>Une erreur est survenu!</div>";
+                    break;
+                case 'noSession':
+                    echo "<div id='message' class='orange'>Aucune session trouver!</div>";
+                    break;
+                case 'dataMissing':
+                    echo "<div id='message' class='orange'>Donnée(s) manquante(s)!</div>";
+                    break;
+                case 'passwordBad':
+                    echo "<div id='message' class='orange'>Utilisateur ou mots de passe incorrect!</div>";
+                    break;
+                case 'noUser':
+                    echo "<div id='message' class='orange'>Aucun utilisateur trouver!</div>";
+                    break;
+                case 'easyPassword':
+                    echo "<div id='message' class='orange'>Mots de passe trop simple!</div>";
+                    break;
+                case 'userTrue':
+                    echo "<div id='message' class='orange'>Utilisateur existant!</div>";
+                    break;
+            }
+        }
+        if (isset($_GET['statut']))
+        {
+            $statut = $_GET['statut'];
+
+            switch ($statut)
+            {
+                case 'add':
+                    echo "<div id='message' class='green'>Object créer!</div>";
+                    break;
+                case 'delete':
+                    echo "<div id='message' class='red'>Object supprimer!</div>";
+                    break;
+                case 'online':
+                    echo "<div id='message' class='green'>Vous êtes en ligne!</div>";
+                    break;
+                case 'create':
+                    echo "<div id='message' class='green'>Compte créer!</div>";
+                    break;
+                case 'offline':
+                    echo "<div id='message' class='red'>Vous êtes hors ligne!</div>";
+                    break;
+            }
+        }
         if (isset($_SESSION['key']))
         {
         ?>
             <div id="newLink">
-                <a href="/index.php?controller=links&action=newlink"><i class="fas fa-plus-square"></i> Ajouter un lien</a>
+                <a href="#" id="link-add-button"><i class="fas fa-plus-square"></i> Ajouter un lien</a>
             </div>
             <div><h1>Links Handler</h1></div>
             <div id="account">
