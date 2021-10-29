@@ -1,6 +1,53 @@
 
+let addLinkButton = document.getElementById('link-add-button');
+let BackLink = document.getElementById('back_link');
+let linkAddForm = document.getElementById('link-add-form');
+
 let form = document.querySelector('#link-add-form form');
 let submitButton = form.querySelector('button[type="submit"]');
+
+addLinkButton.addEventListener('click', function ()
+{
+    linkAddForm.style.display = "flex";
+});
+
+BackLink.addEventListener('click', function ()
+{
+    linkAddForm.style.display = "none";
+})
+
+
+/**
+ * Récupération de la liste au click du bouton.
+ */
+function linkActualisation () {
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        let links = JSON.parse(xhr.responseText);
+        let div = document.getElementById("littleBody");
+        div.innerHTML = "";
+        for(let link of links) {
+            div.innerHTML += `
+                <div class="linkImage">
+                    <div class="image"><img src="/document/placeholder.png" alt="Placeholder, image temporaire."></div>
+                    <div class="linkName"><a href="${link.href}" target="${link.target}">${link.title}</a></div>
+                </div>
+            `
+        }
+    }
+
+    xhr.open("GET", "../api/links/index.php");
+    xhr.send();
+}
+
+linkActualisation();
+
+function resetInput ()
+{
+    form.querySelector('input[name="href"]').value = "";
+    form.querySelector('input[name="title"]').value = "";
+    form.querySelector('input[name="name"]').value = "";
+}
 
 // Sending form.
 submitButton.addEventListener('click', function(e)
@@ -15,6 +62,7 @@ submitButton.addEventListener('click', function(e)
     if(!href || !title || !target || !name)
     {
         console.log("All data are not set");
+
     }
     else
     {
@@ -29,52 +77,7 @@ submitButton.addEventListener('click', function(e)
             name: name
         }));
 
-        xhr.onload = function ()
-        {
-            const response = xhr.response;
-            if(response.hasOwnProperty('error') && response.hasOwnProperty('message'))
-            {
-                const div = document.createElement('div');
-                div.classList.add('alert', `alert-${response.error}`);
-                div.setAttribute('role', 'alert');
-                div.innerHTML = response.message;
-                document.body.appendChild(div);
-            }
-        }
+        linkActualisation();
+        resetInput();
     }
 });
-
-
-/**
- * Récupération de la liste au click du bouton.
- */
-function actualisation ()
-{
-    let xhr = new XMLHttpRequest();
-    xhr.responseType = "json";
-    xhr.open('GET', '/api/links/index.php');
-
-    xhr.onload = function()
-    {
-        console.log(1);
-        const links = JSON.parse(xhr.responseText);
-
-        //xhr.open('GET', '/api/links/index.php');
-        //xhr.send();
-
-        const table = document.getElementById('littleBody');
-        table.innerHTML = '';
-
-        for(let link of links)
-        {
-            table.innerHTML += `
-                <div class="linkImage">
-                    <div class="image"><img src="/document/placeholder.png" alt="Placeholder, image temporaire."></div>
-                    <div class="linkName"><a href="${link.href}" target="${link.target}">${link.title}</a></div>
-                </div>
-            `;
-        }
-    };
-}
-
-actualisation();

@@ -1,5 +1,7 @@
-<div id="link-add-form">
+<div id="link-add-form" class="modal">
     <form>
+        <h3>Ajout d'un nouveau lien</h3>
+        <hr>
         Href:
         <input name="href" type="url" maxlength="150" required>
         Title:
@@ -12,28 +14,9 @@
         Name:
         <input name="name" type="text" maxlength="100" required>
         <button type="submit">Ajouter</button>
+        <button type="button" id="back_link">Retour</button>
     </form>
 </div>
-<div id="littleBody">
-    <?php
-/*
-    use Bosqu\ProjetLinksHandler\Model\Manager\LinksManager;
-
-    ?>
-    <?php
-    $linkManager = new LinksManager();
-    $allLinks = $linkManager->getAll();
-
-    foreach ($allLinks as $link)
-    {
-    ?>
-        <div class="linkImage">
-            <div class="image"><img src="/document/placeholder.png" alt="Placeholder, image temporaire."></div>
-            <div class="linkName"><a href="<?=$link->getHref()?>" target="<?=$link->getTarget()?>"><?=$link->getTitle()?></a></div>
-        </div>
-    <?php
-    }*/
-    ?>
-</div>
+<div id="littleBody"></div>
 
 <script src="/js/app.js"></script>

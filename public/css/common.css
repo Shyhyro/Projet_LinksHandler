@@ -40,7 +40,7 @@ header {
     border-radius: 25px;
 }
 
-.linkImage {
+.Image {
     margin-bottom: 30px;
     width: 300px;
     height: 300px;
@@ -54,6 +54,28 @@ header {
 .image img {
     height: 100%;
     width: 100%;
+}
+
+.modal form {
+    padding: 25px;
+    background-color: #B1D4E0;
+    border-radius: 10px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal {
+    z-index: 2;
+    background-color: rgba(12, 45, 72, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .linkName {
@@ -109,6 +131,10 @@ tr:hover {
     border: solid #145DA0 2px;
 }
 
+#link-add-form {
+    display: none;
+}
+
 /* ---- Reset / input / button ---- */
 a {
     text-decoration: none;
@@ -128,6 +154,7 @@ button, input {
 }
 
 button:hover {
+    border: #2E8BC0 solid 2px;
     background-color: #B1D4E0;
 }
 
@@ -138,6 +165,7 @@ a:hover, button:hover {
 
 /* ---- Messages / Colors ---- */
 #message {
+    z-index: 4;
     position: absolute;
     bottom: 10px;
     left: 10px;
