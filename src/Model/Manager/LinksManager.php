@@ -58,4 +58,22 @@ class LinksManager
 
         return $stmt->execute();
     }
+
+    /**
+     * Get all Links by user Id
+     * @return array
+     */
+    public function getAllByUserId($userId): ?array
+    {
+        $array = [];
+        $stmt = Database::getInstance()->prepare("SELECT * FROM prefix_link WHERE user_fk = :userId");
+        $stmt->bindValue(':userId', $userId);
+
+        if($stmt->execute() && $linkDatas = $stmt->fetchAll()) {
+            foreach ($linkDatas as $linkData) {
+                $array[] = new Links($linkData['id'], $linkData['href'], $linkData['title'], $linkData['target'], $linkData['name'], $linkData['user_fk']);
+            }
+        }
+        return $array;
+    }
 }

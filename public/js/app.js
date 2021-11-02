@@ -31,6 +31,7 @@ function linkActualisation () {
                 <div class="linkImage">
                     <div class="image"><img src="/document/placeholder.png" alt="Placeholder, image temporaire."></div>
                     <div class="linkName"><a href="${link.href}" target="${link.target}">${link.title}</a></div>
+                    <p><i class="fas fa-trash"></i></p>
                 </div>
             `
         }

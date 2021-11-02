@@ -2,6 +2,8 @@
 
 require "../../../vendor/autoload.php";
 
+session_start();
+
 use Bosqu\ProjetLinksHandler\Model\Entity\Links;
 use Bosqu\ProjetLinksHandler\Model\Manager\LinksManager;
 
