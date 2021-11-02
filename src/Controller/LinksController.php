@@ -3,6 +3,7 @@
 namespace Bosqu\ProjetLinksHandler\Controller;
 
 use Bosqu\ProjetLinksHandler\Model\Manager\LinksManager;
+use Bosqu\ProjetLinksHandler\Model\Manager\UserManager;
 
 class LinksController extends Controller
 {
@@ -11,21 +12,17 @@ class LinksController extends Controller
     {
         if (isset($_SESSION['key']))
         {
+            $userId = $_SESSION['id'];
+            $this->render("links.view.php", "Links");
+        }
+        else if (isset($_GET['user']))
+        {
+            $userId = $_GET['user'];
+            $userManager = new UserManager();
             $this->render("links.view.php", "Links");
         }
         else
         {
-            header("location:/index.php?error=noSession");
-        }
-    }
-
-    public function newlink()
-    {
-        if (isset($_SESSION['key']))
-        {
-            $this->render("links.new.view.php", "New Link");
-        }
-        else{
             header("location:/index.php?error=noSession");
         }
     }
@@ -40,9 +37,10 @@ class LinksController extends Controller
                 $title = strip_tags(trim($_POST['title']));
                 $target = strip_tags(trim($_POST['target']));
                 $name = strip_tags(trim($_POST['name']));
+                $user = $_SESSION['id'];
 
                 $linkManager = new LinksManager();
-                $linkManager = $linkManager->addLink($href, $title, $target, $name);
+                $linkManager = $linkManager->addLink($href, $title, $target, $name, $user);
 
                 if ($linkManager)
                 {
@@ -65,23 +63,32 @@ class LinksController extends Controller
 
     public function remove()
     {
-        if (isset($_SESSION['key'], $_GET['id']))
+        if (isset($_SESSION['key']))
         {
-            $link = strip_tags(trim($_GET['id']));
-            $linkManager = new LinksManager();
-            $linkManager = $linkManager->removeLink($link);
-            if ($linkManager)
+            $userId = $_SESSION['id'];
+
+            if (isset($_GET['id']))
             {
-                header("location:/index.php?controller=user&statut=delete");
+                $link = strip_tags(trim($_GET['id']));
+                $linkManager = new LinksManager();
+                $linkManager = $linkManager->removeLink($link);
+                if ($linkManager)
+                {
+                    header("location:/index.php?controller=user&statut=delete");
+                }
+                else
+                {
+                    header("location:/index.php?controller=user&error=errorIsComing");
+                }
             }
             else
             {
-                header("location:/index.php?controller=user&error=errorIsComing");
+                header("location:/index.php?controller=user&error=dataMissing");
             }
         }
         else
         {
-            header("location:/index.php?controller=user&error=dataMissing");
+            header("location:/index.php?error=noSession");
         }
     }
 }

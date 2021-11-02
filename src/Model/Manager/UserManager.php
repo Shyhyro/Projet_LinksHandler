@@ -37,7 +37,7 @@ class UserManager
      */
     public function addUser($nom, $prenom, $mail, $pass) :bool
     {
-        $stmt = Database::getInstance()->prepare("INSERT INTO prefix_user (nom, prenom, mail, pass) VALUES (:nom, :prenom, :mail, :pass)");
+        $stmt = Database::getInstance()->prepare("INSERT INTO prefix_user (nom, prenom, mail, pass, role_fk) VALUES (:nom, :prenom, :mail, :pass, 2)");
         $stmt->bindValue(':nom', $nom);
         $stmt->bindValue(':prenom', $prenom);
         $stmt->bindValue(':mail', $mail);

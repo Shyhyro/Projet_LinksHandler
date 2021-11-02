@@ -19,7 +19,7 @@ class LinksManager
 
         if($stmt->execute() && $linkDatas = $stmt->fetchAll()) {
             foreach ($linkDatas as $linkData) {
-                $array[] = new Links($linkData['id'], $linkData['href'], $linkData['title'], $linkData['target'], $linkData['name']);
+                $array[] = new Links($linkData['id'], $linkData['href'], $linkData['title'], $linkData['target'], $linkData['name'], $linkData['user_fk']);
             }
         }
         return $array;
@@ -31,15 +31,17 @@ class LinksManager
      * @param $title
      * @param $target
      * @param $name
+     * @param $user_fk
      * @return bool
      */
-    public function addLink($href, $title, $target, $name) :bool
+    public function addLink($href, $title, $target, $name, $user_fk) :bool
     {
-        $stmt = Database::getInstance()->prepare("INSERT INTO prefix_link (href, title, target, name) VALUES (:href, :title, :target, :name)");
+        $stmt = Database::getInstance()->prepare("INSERT INTO prefix_link (href, title, target, name, user_fk) VALUES (:href, :title, :target, :name, :user)");
         $stmt->bindValue(':href', $href);
         $stmt->bindValue(':title', $title);
         $stmt->bindValue(':target', $target);
         $stmt->bindValue(':name', $name);
+        $stmt->bindValue(':user', $user_fk);
 
         return $stmt->execute();
     }

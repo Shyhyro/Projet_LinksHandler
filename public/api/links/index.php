@@ -42,6 +42,7 @@ function getAll(LinksManager $manager): string
             'title' => $link->getTitle(),
             'target' => $link->getTarget(),
             'name' => $link->getName(),
+            'user' => $link->getUserFk()
         ];
     }
     return json_encode($response);
@@ -50,5 +51,6 @@ function getAll(LinksManager $manager): string
 function addLink($data)
 {
     $manager = new LinksManager();
-    $manager->addLink($data->href, $data->title, $data->target, $data->name);
+    $user = $_SESSION['id'];
+    $manager->addLink($data->href, $data->title, $data->target, $data->name, $user);
 }

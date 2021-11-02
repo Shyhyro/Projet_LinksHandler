@@ -32,6 +32,7 @@ class UserController extends Controller
 
                         if (isset($_SESSION['id'], $_SESSION['nom'], $_SESSION['key']))
                         {
+                            $userId = $_SESSION['id'];
                             header('location:/index.php?controller=links&statut=online');
                         }
                         else
@@ -130,6 +131,7 @@ class UserController extends Controller
 
     public function home()
     {
+        $userId = $_SESSION['id'];
         $this->render("user.view.php", "Options");
     }
 }

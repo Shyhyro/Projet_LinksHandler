@@ -14,7 +14,7 @@ addLinkButton.addEventListener('click', function ()
 BackLink.addEventListener('click', function ()
 {
     linkAddForm.style.display = "none";
-})
+});
 
 
 /**
@@ -35,7 +35,6 @@ function linkActualisation () {
             `
         }
     }
-
     xhr.open("GET", "../api/links/index.php");
     xhr.send();
 }
@@ -59,10 +58,9 @@ submitButton.addEventListener('click', function(e)
     const name = form.querySelector('input[name="name"]').value;
     target = target.options[target.selectedIndex].value;
 
-    if(!href || !title || !target || !name)
+    if(!href || !title || !target || !name )
     {
         console.log("All data are not set");
-
     }
     else
     {
