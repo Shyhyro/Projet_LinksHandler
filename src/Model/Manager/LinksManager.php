@@ -76,4 +76,15 @@ class LinksManager
         }
         return $array;
     }
+
+    public function editLink($href, $title, $target, $name, $linkId) :bool
+    {
+        $stmt = Database::getInstance()->prepare("UPDATE prefix_link SET href = :href AND title = :title AND target = :target AND name = :name 
+                                                    WHERE id = :linkId");
+        $stmt->bindValue(":href", $href);
+        $stmt->bindValue(":title", $title);
+        $stmt->bindValue(":target", $target);
+        $stmt->bindValue(":name", $name);
+        $stmt->bindValue(":linkId", $linkId);
+    }
 }

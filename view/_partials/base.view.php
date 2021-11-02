@@ -72,7 +72,7 @@
             <div id="newLink">
                 <a href="#" id="link-add-button"><i class="fas fa-plus-square"></i> Ajouter un lien</a>
             </div>
-            <div><h1>Links Handler</h1></div>
+            <div id="website"><h1>Links Handler</h1></div>
             <div id="account">
                 <a href="/index.php?controller=user"><i class="fas fa-portrait"></i></a>
             </div>
@@ -86,5 +86,11 @@
     </header>
     <?=$html?>
 </div>
+
+<footer>
+    <div>This app is made with a <i class="fas fa-paw"></i> by a Cat!</div>
+    <div><a href="#">Contact</a></div>
+</footer>
+
 </body>
 </html>

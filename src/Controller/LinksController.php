@@ -12,13 +12,10 @@ class LinksController extends Controller
     {
         if (isset($_SESSION['key']))
         {
-            $userId = $_SESSION['id'];
             $this->render("links.view.php", "Links");
         }
         else if (isset($_GET['user']))
         {
-            $userId = $_GET['user'];
-            $userManager = new UserManager();
             $this->render("links.view.php", "Links");
         }
         else
@@ -65,8 +62,6 @@ class LinksController extends Controller
     {
         if (isset($_SESSION['key']))
         {
-            $userId = $_SESSION['id'];
-
             if (isset($_GET['id']))
             {
                 $link = strip_tags(trim($_GET['id']));
@@ -74,16 +69,16 @@ class LinksController extends Controller
                 $linkManager = $linkManager->removeLink($link);
                 if ($linkManager)
                 {
-                    header("location:/index.php?controller=user&statut=delete");
+                    header("location:/index.php?controller=links&statut=delete");
                 }
                 else
                 {
-                    header("location:/index.php?controller=user&error=errorIsComing");
+                    header("location:/index.php?controller=links&error=errorIsComing");
                 }
             }
             else
             {
-                header("location:/index.php?controller=user&error=dataMissing");
+                header("location:/index.php?controller=links&error=dataMissing");
             }
         }
         else

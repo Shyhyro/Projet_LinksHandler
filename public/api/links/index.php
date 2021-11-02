@@ -34,7 +34,7 @@ function getAll(LinksManager $manager): string
 {
     $response = [];
     // Obtention des links.
-    $data = $manager->getAll();
+    $data = $manager->getAllByUserId($_SESSION['id']);
     foreach($data as $link)
     {
         /* @var Links $links */

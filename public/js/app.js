@@ -1,11 +1,12 @@
-
+// add link
 let addLinkButton = document.getElementById('link-add-button');
 let BackLink = document.getElementById('back_link');
 let linkAddForm = document.getElementById('link-add-form');
-
 let form = document.querySelector('#link-add-form form');
 let submitButton = form.querySelector('button[type="submit"]');
 
+// Event Hide and Seek
+// Add link
 addLinkButton.addEventListener('click', function ()
 {
     linkAddForm.style.display = "flex";
@@ -15,7 +16,6 @@ BackLink.addEventListener('click', function ()
 {
     linkAddForm.style.display = "none";
 });
-
 
 /**
  * Récupération de la liste au click du bouton.
@@ -31,7 +31,8 @@ function linkActualisation () {
                 <div class="linkImage">
                     <div class="image"><img src="/document/placeholder.png" alt="Placeholder, image temporaire."></div>
                     <div class="linkName"><a href="${link.href}" target="${link.target}">${link.title}</a></div>
-                    <p><i class="fas fa-trash"></i></p>
+                    <a class="delete" href="/index?controller=links&action=remove&id=${link.id}"><i class="fas fa-trash"></i></a>
+                    <!--<span class="edit"><i class="fas fa-pen-square"></i></span>-->
                 </div>
             `
         }
