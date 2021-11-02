@@ -2,6 +2,8 @@
 
 require "../../../vendor/autoload.php";
 
+session_start();
+
 use Bosqu\ProjetLinksHandler\Model\Entity\Links;
 use Bosqu\ProjetLinksHandler\Model\Manager\LinksManager;
 
@@ -15,7 +17,9 @@ switch($requestType)
     // Obtention d'informations.
     case 'POST':
         addLink(json_decode(file_get_contents("php://input")));
-        //echo getAll($manager);
+        break;
+    case 'GET':
+        echo getAll($manager);
         break;
     default:
         break;
@@ -40,6 +44,7 @@ function getAll(LinksManager $manager): string
             'title' => $link->getTitle(),
             'target' => $link->getTarget(),
             'name' => $link->getName(),
+            'user' => $link->getUserFk()
         ];
     }
     return json_encode($response);
@@ -48,5 +53,6 @@ function getAll(LinksManager $manager): string
 function addLink($data)
 {
     $manager = new LinksManager();
-    $manager->addLink($data->href, $data->title, $data->target, $data->name);
+    $user = $_SESSION['id'];
+    $manager->addLink($data->href, $data->title, $data->target, $data->name, $user);
 }

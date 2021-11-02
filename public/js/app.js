@@ -1,15 +1,53 @@
 
+let addLinkButton = document.getElementById('link-add-button');
+let BackLink = document.getElementById('back_link');
+let linkAddForm = document.getElementById('link-add-form');
+
 let form = document.querySelector('#link-add-form form');
 let submitButton = form.querySelector('button[type="submit"]');
 
-/**
- * Ajout d'un lien en base de données.
- */
-// Affichage du form d'ajout d'un lien.
-document.getElementById('link-add-button').addEventListener('click', function()
+addLinkButton.addEventListener('click', function ()
 {
-    form.parentElement.style.display = 'block';
+    linkAddForm.style.display = "flex";
 });
+
+BackLink.addEventListener('click', function ()
+{
+    linkAddForm.style.display = "none";
+});
+
+
+/**
+ * Récupération de la liste au click du bouton.
+ */
+function linkActualisation () {
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        let links = JSON.parse(xhr.responseText);
+        let div = document.getElementById("littleBody");
+        div.innerHTML = "";
+        for(let link of links) {
+            div.innerHTML += `
+                <div class="linkImage">
+                    <div class="image"><img src="/document/placeholder.png" alt="Placeholder, image temporaire."></div>
+                    <div class="linkName"><a href="${link.href}" target="${link.target}">${link.title}</a></div>
+                    <p><i class="fas fa-trash"></i></p>
+                </div>
+            `
+        }
+    }
+    xhr.open("GET", "../api/links/index.php");
+    xhr.send();
+}
+
+linkActualisation();
+
+function resetInput ()
+{
+    form.querySelector('input[name="href"]').value = "";
+    form.querySelector('input[name="title"]').value = "";
+    form.querySelector('input[name="name"]').value = "";
+}
 
 // Sending form.
 submitButton.addEventListener('click', function(e)
@@ -21,7 +59,7 @@ submitButton.addEventListener('click', function(e)
     const name = form.querySelector('input[name="name"]').value;
     target = target.options[target.selectedIndex].value;
 
-    if(!href || !title || !target || !name)
+    if(!href || !title || !target || !name )
     {
         console.log("All data are not set");
     }
@@ -38,48 +76,7 @@ submitButton.addEventListener('click', function(e)
             name: name
         }));
 
-        xhr.onload = function ()
-        {
-            const response = xhr.response;
-            if(response.hasOwnProperty('error') && response.hasOwnProperty('message'))
-            {
-                const div = document.createElement('div');
-                div.classList.add('alert', `alert-${response.error}`);
-                div.setAttribute('role', 'alert');
-                div.innerHTML = response.message;
-                document.body.appendChild(div);
-            }
-        }
+        linkActualisation();
+        resetInput();
     }
-});
-
-
-/**
- * Récupération de la liste au click du bouton.
- */
-let linksListButton = document.getElementById('links-list');
-linksListButton.addEventListener('click', function(e)
-{
-    let xhr = new XMLHttpRequest();
-    xhr.onload = function()
-    {
-        const links = JSON.parse(xhr.responseText);
-        const table = document.querySelector('#link-list-content');
-        table.innerHTML = '';
-
-        for(let link of links)
-        {
-            table.innerHTML += `
-                <div class="linkImage">
-                    <div class="image"><img src="/document/placeholder.png" alt="Placeholder, image temporaire."></div>
-                    <div class="linkName"><a href="${link.href}" target="${link.target}">${link.title}</a></div>
-                </div>
-            `;
-        }
-
-        table.parentElement.style.display = 'table';
-    };
-
-    xhr.open('GET', '/api/links/index.php');
-    xhr.send();
 });

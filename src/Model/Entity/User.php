@@ -9,6 +9,7 @@ class User
     private ?string $prenom;
     private ?string $mail;
     private ?string $pass;
+    private ?int $role_fk;
 
     /**
      * User constructor.
@@ -18,13 +19,14 @@ class User
      * @param string|null $mail
      * @param string|null $pass
      */
-    public function __construct(int $id = null, string $nom = null, string $prenom = null, string $mail = null, string $pass = null)
+    public function __construct(int $id = null, string $nom = null, string $prenom = null, string $mail = null, string $pass = null, int $role_fk = null)
     {
         $this->id = $id;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->mail = $mail;
         $this->pass = $pass;
+        $this->role_fk = $role_fk;
     }
 
     /**
@@ -113,6 +115,17 @@ class User
     public function setPass(?string $pass): User
     {
         $this->pass = $pass;
+        return $this;
+    }
+
+    public function getRoleFk(): ?int
+    {
+        return $this->role_fk;
+    }
+
+    public function setRoleFk($role_fk): User
+    {
+        $this->role_fk = $role_fk;
         return $this;
     }
 }

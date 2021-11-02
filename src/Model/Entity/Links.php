@@ -9,22 +9,25 @@ class Links
     private ?string $title;
     private ?string $target;
     private ?string $name;
+    private ?int $user_fk;
 
     /**
      * Links constructor.
      * @param int|null $id
-     * @param string|null $nom
-     * @param string|null $prenom
-     * @param string|null $mail
-     * @param string|null $pass
+     * @param string|null $href
+     * @param string|null $title
+     * @param string|null $target
+     * @param string|null $name
+     * @param int|null $user_fk
      */
-    public function __construct(int $id = null, string $href = null, string $title = null, string $target = null, string $name = null)
+    public function __construct(int $id = null, string $href = null, string $title = null, string $target = null, string $name = null, int $user_fk = null)
     {
         $this->id = $id;
         $this->href = $href;
         $this->title = $title;
         $this->target = $target;
         $this->name = $name;
+        $this->user_fk = $user_fk;
     }
 
     /**
@@ -113,6 +116,17 @@ class Links
     public function setName(?string $name): Links
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getUserFk(): ?int
+    {
+        return $this->user_fk;
+    }
+
+    public function setUserFk($user_fk): Links
+    {
+        $this->user_fk = $user_fk;
         return $this;
     }
 }
