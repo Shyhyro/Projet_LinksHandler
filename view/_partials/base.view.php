@@ -100,7 +100,7 @@
     }
     else
     {
-        echo "<div><h1>Links Handler</h1></div>";
+        echo "<div id='website'><h1>Links Handler</h1></div>";
     }
     ?>
 </header>
@@ -113,7 +113,7 @@
     <div>This app is made with a <i class="fas fa-paw"></i> by a Cat!</div>
     <div>
         <a href="mailto:linkshandler@exemple.com?subject=Feedback for linkshandler.com&body=<?=$_SESSION['nom']?>">
-            Envoyer un Email
+            <button type="button">Envoyer un Email</button>
         </a>
     </div>
 </footer>

@@ -52,31 +52,77 @@ header i {
 
 /* ---- Header ---- */
 header {
+    color: #FEFEFE;
+    background-color: #2E8BC0;
     justify-content: space-between;
 }
 
+#website {
+    text-align: center;
+    z-index: 1;
+}
+
 #account {
-    background-color: orange;
     border-radius: 25px;
 }
 
-.Image {
-    margin-bottom: 30px;
+/* ---- Little Body ---- */
+.linkImage {
+    margin-bottom: 25px;
+}
+
+.image {
     width: 300px;
     height: 300px;
 }
 
+.image, .image img {
+    border-radius: 15px 15px 0 0;
+}
+
 .image {
-    border: solid 4px #B1D4E0;
+    background-color: #2E8BC0;
+    border: solid 6px #2E8BC0;
     height: 250px;
 }
 
+.linkName {
+    background-color: #145DA0;
+    border-radius: 0 0 15px 15px;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -6px;
+    height: 50px;
+    border: solid 6px #145DA0;
+}
+
+.linkName:hover {
+    cursor: pointer;
+    background-color: rgba(177, 212, 224, 0.6);
+}
+
+#link-add-form, #update-link {
+    display: none;
+}
+
+.delete:hover, .edit:hover {
+    color: red;
+}
+
+/* ---- Modal ---- */
 .modal form {
     padding: 25px;
-    background-color: #B1D4E0;
+    background-color: #2E8BC0;
     border-radius: 10px;
     position: absolute;
     flex-direction: column;
+}
+
+hr {
+    color: #FEFEFE;
+    margin-bottom: 10px;
 }
 
 .modal {
@@ -89,21 +135,7 @@ header {
     align-items: center;
 }
 
-.linkName {
-    z-index: 1;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: -5px;
-    height: 50px;
-    border: solid 4px #145DA0;
-}
-
-.linkName:hover {
-    cursor: pointer;
-    background-color: rgba(177, 212, 224, 0.6);
-}
-
+/* ---- Home ---- */
 .registration form {
     flex-direction: column;
 }
@@ -128,31 +160,17 @@ header {
     border: solid #145DA0 2px;
 }
 
-#link-add-form, #update-link {
-    display: none;
-}
-
-.delete:hover, .edit:hover {
-    color: red;
-}
-
+/* ---- Footer ---- */
 footer div {
     padding: 5px;
 }
 
 footer {
-    font-size: 1rem;
+    color: #FEFEFE;
     padding: 15px;
     margin-top: 3rem;
-    background-color: #B1D4E0;
+    background-color: #2E8BC0;
     text-align: center;
-}
-
-#website {
-    left: 0;
-    position: absolute;
-    text-align: center;
-    z-index: -1;
 }
 
 #newLink a {
@@ -167,7 +185,7 @@ footer {
 /* ---- Reset / input / button ---- */
 a {
     text-decoration: none;
-    color: #145DA0;
+    color: #FEFEFE;
 }
 
 button {
@@ -201,6 +219,7 @@ a:hover, button:hover, .delete, .edit {
     padding: 10px 20px;
     background-color: rgb(30, 30, 30);
     animation-duration: 6s;
+    animation-delay: 2s;
     animation-fill-mode: forwards;
     animation-name: messageAnim;
 }
@@ -223,9 +242,6 @@ a:hover, button:hover, .delete, .edit {
 /* ---- Animation ---- */
 @keyframes messageAnim {
     0% {
-        opacity: 1;
-    }
-    50% {
         opacity: 1;
     }
     100% {

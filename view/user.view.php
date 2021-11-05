@@ -7,8 +7,16 @@ if (isset($_SESSION['key']))
 {
     $userManager = new UserManager();
     $user = $userManager->searchUserById($_SESSION['id']);
-    $links = new LinksManager();
-    $links = $links->getAllByUserId($_SESSION['id']);
+    $linksManager = new LinksManager();
+    $links = $linksManager->getAllByUserId($_SESSION['id']);
+
+    $countLinksClick = 0;
+    $countLink = 0;
+    $allLinks =$linksManager->getAllByUserId($_SESSION['id']);
+    foreach ($allLinks as $oneLink) {
+        $countLinksClick = $countLinksClick + $oneLink->getClick();
+        $countLink = $countLink + 1;
+    }
 ?>
 <div class="center">
     <div><a href="/index.php?controller=user&action=logout"><button type="button">Déconnexion</button></a></div>
@@ -17,12 +25,12 @@ if (isset($_SESSION['key']))
     <div><a href="/index.php?controller=links"><button type="button">Retour</button></a></div>
 </div>
 <?php
-    if ($userManager->searchUserById($_SESSION['id'])->getRoleFk() === 1)
+    if ($userManager->searchUserById($_SESSION['id'])->getRoleFk() === 1 || 2)
     {
         ?>
         <div>
-            <div id="totalClick"></div>
-            <div id="totalLinks"></div>
+            <div>Total des clicks: <?=$countLinksClick?></div>
+            <div>Total de liens: <?=$countLink?></div>
             <canvas id="myChart" width="400" height="400"></canvas>
         </div>
         <script src="/js/canva.js"></script>
