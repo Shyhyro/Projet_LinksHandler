@@ -30,7 +30,7 @@ function linkActualisation () {
             div.innerHTML += `
                 <div class="linkImage">
                     <div class="image"><img src="/document/placeholder.png" alt="Placeholder, image temporaire."></div>
-                    <div class="linkName"><a href="${link.href}" class="linkClick" data-link="${link.id}" data-click="${link.click}" target="${link.target}">${link.title}</a></div>
+                    <a href="${link.href}" class="linkClick linkName" data-link="${link.id}" data-click="${link.click}" target="${link.target}">${link.title}</a>
                     <a class="delete" href="#"><i class="fas fa-trash deleteButton" data-link="${link.id}"></i></a>
                     <!--<span class="edit"><i class="fas fa-pen-square"></i></span>-->
                 </div>
@@ -93,7 +93,9 @@ function deleteLink()
             let xhr = new XMLHttpRequest();
             xhr.responseType = "json";
             xhr.open("DELETE", "/api/links/index.php");
-            xhr.send(JSON.stringify({id: e.dataset.link}));
+            xhr.send(JSON.stringify({
+                id: e.dataset.link
+            }));
 
             setTimeout(function() {
                 linkActualisation ();
@@ -116,6 +118,10 @@ function clickUpdate()
                 id: e.dataset.link,
                 click: e.dataset.click
             }));
+
+            setTimeout(function() {
+                linkActualisation ();
+            },300);
         })
     })
 }
