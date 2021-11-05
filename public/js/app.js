@@ -1,11 +1,12 @@
-
+// add link
 let addLinkButton = document.getElementById('link-add-button');
 let BackLink = document.getElementById('back_link');
 let linkAddForm = document.getElementById('link-add-form');
-
 let form = document.querySelector('#link-add-form form');
 let submitButton = form.querySelector('button[type="submit"]');
 
+// Event Hide and Seek
+// Add link
 addLinkButton.addEventListener('click', function ()
 {
     linkAddForm.style.display = "flex";
@@ -15,7 +16,6 @@ BackLink.addEventListener('click', function ()
 {
     linkAddForm.style.display = "none";
 });
-
 
 /**
  * Récupération de la liste au click du bouton.
@@ -30,11 +30,14 @@ function linkActualisation () {
             div.innerHTML += `
                 <div class="linkImage">
                     <div class="image"><img src="/document/placeholder.png" alt="Placeholder, image temporaire."></div>
-                    <div class="linkName"><a href="${link.href}" target="${link.target}">${link.title}</a></div>
-                    <p><i class="fas fa-trash"></i></p>
+                    <div class="linkName"><a href="${link.href}" class="linkClick" data-link="${link.id}" data-click="${link.click}" target="${link.target}">${link.title}</a></div>
+                    <a class="delete" href="#"><i class="fas fa-trash deleteButton" data-link="${link.id}"></i></a>
+                    <!--<span class="edit"><i class="fas fa-pen-square"></i></span>-->
                 </div>
             `
         }
+        clickUpdate();
+        deleteLink();
     }
     xhr.open("GET", "../api/links/index.php");
     xhr.send();
@@ -80,3 +83,39 @@ submitButton.addEventListener('click', function(e)
         resetInput();
     }
 });
+
+function deleteLink()
+{
+    let buttonDelete = document.querySelectorAll(".deleteButton");
+
+    buttonDelete.forEach(function (e) {
+        e.addEventListener("click", function () {
+            let xhr = new XMLHttpRequest();
+            xhr.responseType = "json";
+            xhr.open("DELETE", "/api/links/index.php");
+            xhr.send(JSON.stringify({id: e.dataset.link}));
+
+            setTimeout(function() {
+                linkActualisation ();
+            },300);
+        })
+    })
+}
+
+function clickUpdate()
+{
+    let linkClick = document.querySelectorAll(".linkClick");
+
+    linkClick.forEach(function (e) {
+        e.addEventListener("click", function () {
+
+            let xhr = new XMLHttpRequest();
+            xhr.responseType = "json";
+            xhr.open("PUT", "/api/links/index.php");
+            xhr.send(JSON.stringify({
+                id: e.dataset.link,
+                click: e.dataset.click
+            }));
+        })
+    })
+}
