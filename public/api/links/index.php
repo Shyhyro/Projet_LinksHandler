@@ -21,6 +21,12 @@ switch($requestType)
     case 'GET':
         echo getAll($manager);
         break;
+    case 'DELETE':
+        delete(json_decode(file_get_contents("php://input")));
+        break;
+    case 'PUT':
+        updateClick(json_decode(file_get_contents("php://input")));
+        break;
     default:
         break;
 }
@@ -44,7 +50,8 @@ function getAll(LinksManager $manager): string
             'title' => $link->getTitle(),
             'target' => $link->getTarget(),
             'name' => $link->getName(),
-            'user' => $link->getUserFk()
+            'user' => $link->getUserFk(),
+            'click' => $link->getClick()
         ];
     }
     return json_encode($response);
@@ -55,4 +62,18 @@ function addLink($data)
     $manager = new LinksManager();
     $user = $_SESSION['id'];
     $manager->addLink($data->href, $data->title, $data->target, $data->name, $user);
+}
+
+function delete($data)
+{
+    $id = filter_var($data->id, FILTER_SANITIZE_NUMBER_INT);
+    (new LinksManager())->removeLink($id);
+}
+
+function updateClick($data)
+{
+    $id = filter_var($data->id, FILTER_SANITIZE_NUMBER_INT);
+    $click = filter_var($data->click, FILTER_SANITIZE_NUMBER_INT) + 1;
+
+    (new LinksManager())->addClick($id, $click);
 }

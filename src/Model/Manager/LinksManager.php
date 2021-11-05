@@ -19,7 +19,7 @@ class LinksManager
 
         if($stmt->execute() && $linkDatas = $stmt->fetchAll()) {
             foreach ($linkDatas as $linkData) {
-                $array[] = new Links($linkData['id'], $linkData['href'], $linkData['title'], $linkData['target'], $linkData['name'], $linkData['user_fk']);
+                $array[] = new Links($linkData['id'], $linkData['href'], $linkData['title'], $linkData['target'], $linkData['name'], $linkData['user_fk'], $linkData['click']);
             }
         }
         return $array;
@@ -71,7 +71,7 @@ class LinksManager
 
         if($stmt->execute() && $linkDatas = $stmt->fetchAll()) {
             foreach ($linkDatas as $linkData) {
-                $array[] = new Links($linkData['id'], $linkData['href'], $linkData['title'], $linkData['target'], $linkData['name'], $linkData['user_fk']);
+                $array[] = new Links($linkData['id'], $linkData['href'], $linkData['title'], $linkData['target'], $linkData['name'], $linkData['user_fk'], $linkData['click']);
             }
         }
         return $array;
@@ -86,5 +86,16 @@ class LinksManager
         $stmt->bindValue(":target", $target);
         $stmt->bindValue(":name", $name);
         $stmt->bindValue(":linkId", $linkId);
+
+        return $stmt->execute();
+    }
+
+    public function addClick($linkId, $click) :bool
+    {
+        $stmt = Database::getInstance()->prepare("UPDATE prefix_link SET click = :click WHERE id = :linkId");
+        $stmt->bindValue(":click", $click);
+        $stmt->bindValue(":linkId", $linkId);
+
+        return $stmt->execute();
     }
 }

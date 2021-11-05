@@ -30,12 +30,14 @@ function linkActualisation () {
             div.innerHTML += `
                 <div class="linkImage">
                     <div class="image"><img src="/document/placeholder.png" alt="Placeholder, image temporaire."></div>
-                    <div class="linkName"><a href="${link.href}" target="${link.target}">${link.title}</a></div>
-                    <a class="delete" href="/index?controller=links&action=remove&id=${link.id}"><i class="fas fa-trash"></i></a>
+                    <div class="linkName"><a href="${link.href}" class="linkClick" data-link="${link.id}" data-click="${link.click}" target="${link.target}">${link.title}</a></div>
+                    <a class="delete" href="#"><i class="fas fa-trash deleteButton" data-link="${link.id}"></i></a>
                     <!--<span class="edit"><i class="fas fa-pen-square"></i></span>-->
                 </div>
             `
         }
+        clickUpdate();
+        deleteLink();
     }
     xhr.open("GET", "../api/links/index.php");
     xhr.send();
@@ -81,3 +83,39 @@ submitButton.addEventListener('click', function(e)
         resetInput();
     }
 });
+
+function deleteLink()
+{
+    let buttonDelete = document.querySelectorAll(".deleteButton");
+
+    buttonDelete.forEach(function (e) {
+        e.addEventListener("click", function () {
+            let xhr = new XMLHttpRequest();
+            xhr.responseType = "json";
+            xhr.open("DELETE", "/api/links/index.php");
+            xhr.send(JSON.stringify({id: e.dataset.link}));
+
+            setTimeout(function() {
+                linkActualisation ();
+            },300);
+        })
+    })
+}
+
+function clickUpdate()
+{
+    let linkClick = document.querySelectorAll(".linkClick");
+
+    linkClick.forEach(function (e) {
+        e.addEventListener("click", function () {
+
+            let xhr = new XMLHttpRequest();
+            xhr.responseType = "json";
+            xhr.open("PUT", "/api/links/index.php");
+            xhr.send(JSON.stringify({
+                id: e.dataset.link,
+                click: e.dataset.click
+            }));
+        })
+    })
+}

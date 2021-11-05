@@ -18,7 +18,7 @@ class UserManager
         $state = $stmt->execute();
         if($state && $userData = $stmt->fetch())
         {
-            $user = new User($userData['id'], $userData['nom'], $userData['prenom'], $userData['mail'], $userData['pass']);
+            $user = new User($userData['id'], $userData['nom'], $userData['prenom'], $userData['mail'], $userData['pass'], $userData['role_fk']);
         }
         else
         {
@@ -58,7 +58,7 @@ class UserManager
         $state = $stmt->execute();
         if ($state && $userData = $stmt->fetch())
         {
-            $user = new User($userData['id'], $userData['nom'], $userData['prenom'], $userData['mail'], $userData['pass']);
+            $user = new User($userData['id'], $userData['nom'], $userData['prenom'], $userData['mail'], $userData['pass'], $userData['role_fk']);
         }
         else
         {
