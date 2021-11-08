@@ -82,13 +82,15 @@ class LinksManager
 
     public function editLink($href, $title, $target, $name, $linkId) :bool
     {
-        $stmt = Database::getInstance()->prepare("UPDATE prefix_link SET href = :href AND title = :title AND target = :target AND name = :name 
+        $stmt = Database::getInstance()->prepare("UPDATE prefix_link SET href = :href AND title = :title AND target = :target AND name = :name AND src = :src
                                                     WHERE id = :linkId");
+        $thumb = new ThumbalizrController();
         $stmt->bindValue(":href", $href);
         $stmt->bindValue(":title", $title);
         $stmt->bindValue(":target", $target);
         $stmt->bindValue(":name", $name);
         $stmt->bindValue(":linkId", $linkId);
+        $stmt->bindValue(":src", $thumb->thumbalizr($href));
 
         return $stmt->execute();
     }
@@ -97,6 +99,14 @@ class LinksManager
     {
         $stmt = Database::getInstance()->prepare("UPDATE prefix_link SET click = :click WHERE id = :linkId");
         $stmt->bindValue(":click", $click);
+        $stmt->bindValue(":linkId", $linkId);
+
+        return $stmt->execute();
+    }
+
+    public function getOneLink($linkId) :bool
+    {
+        $stmt = Database::getInstance()->prepare("SELECT * FROM prefix_link WHERE id = :linkId");
         $stmt->bindValue(":linkId", $linkId);
 
         return $stmt->execute();

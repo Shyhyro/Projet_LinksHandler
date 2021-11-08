@@ -1,4 +1,4 @@
-<div id="update-link" class="modal">
+<div id="link-update-form" class="modal">
     <form>
         <h3>Modification d'un lien</h3>
         <hr>
@@ -14,7 +14,8 @@
         Name:
         <input name="name" type="text" maxlength="100" required>
         <button type="submit">Modifier</button>
-        <button type="button" id="back_edit">Retour</button>
+        <button type="button" id="back_update_link">Retour</button>
     </form>
 </div>
+
 <div id="littleBody"></div>
