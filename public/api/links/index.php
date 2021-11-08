@@ -51,7 +51,8 @@ function getAll(LinksManager $manager): string
             'target' => $link->getTarget(),
             'name' => $link->getName(),
             'user' => $link->getUserFk(),
-            'click' => $link->getClick()
+            'click' => $link->getClick(),
+            'src' => $link->getSrc()
         ];
     }
     return json_encode($response);

@@ -11,6 +11,7 @@ class Links
     private ?string $name;
     private ?int $user_fk;
     private ?int $click;
+    private ?string $src;
 
     /**
      * Links constructor.
@@ -21,8 +22,9 @@ class Links
      * @param string|null $name
      * @param int|null $user_fk
      * @param int|null $click
+     * @param string|null $src
      */
-    public function __construct(int $id = null, string $href = null, string $title = null, string $target = null, string $name = null, int $user_fk = null, int $click = null)
+    public function __construct(int $id = null, string $href = null, string $title = null, string $target = null, string $name = null, int $user_fk = null, int $click = null, string $src = null)
     {
         $this->id = $id;
         $this->href = $href;
@@ -31,6 +33,7 @@ class Links
         $this->name = $name;
         $this->user_fk = $user_fk;
         $this->click = $click;
+        $this->src = $src;
     }
 
     /**
@@ -150,6 +153,26 @@ class Links
     public function setClick(?int $click): Links
     {
         $this->click = $click;
+        return $this;
+    }
+
+    /**
+     * Get src of Links
+     * @return string|null
+     */
+    public function getSrc(): ?string
+    {
+        return $this->src;
+    }
+
+    /**
+     * Set src of Links
+     * @param string|null $src
+     * @return Links
+     */
+    public function setSrc(?string $src): Links
+    {
+        $this->src = $src;
         return $this;
     }
 }
