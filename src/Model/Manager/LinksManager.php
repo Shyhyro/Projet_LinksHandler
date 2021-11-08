@@ -2,6 +2,7 @@
 
 namespace Bosqu\ProjetLinksHandler\Model\Manager;
 
+use Bosqu\ProjetLinksHandler\Controller\ThumbalizrController;
 use Bosqu\ProjetLinksHandler\Model\Classes\Database;
 use Bosqu\ProjetLinksHandler\Model\Entity\Links;
 
@@ -19,7 +20,7 @@ class LinksManager
 
         if($stmt->execute() && $linkDatas = $stmt->fetchAll()) {
             foreach ($linkDatas as $linkData) {
-                $array[] = new Links($linkData['id'], $linkData['href'], $linkData['title'], $linkData['target'], $linkData['name'], $linkData['user_fk'], $linkData['click']);
+                $array[] = new Links($linkData['id'], $linkData['href'], $linkData['title'], $linkData['target'], $linkData['name'], $linkData['user_fk'], $linkData['click'], $linkData['src']);
             }
         }
         return $array;
@@ -36,12 +37,14 @@ class LinksManager
      */
     public function addLink($href, $title, $target, $name, $user_fk) :bool
     {
-        $stmt = Database::getInstance()->prepare("INSERT INTO prefix_link (href, title, target, name, user_fk) VALUES (:href, :title, :target, :name, :user)");
+        $stmt = Database::getInstance()->prepare("INSERT INTO prefix_link (href, title, target, name, user_fk, src) VALUES (:href, :title, :target, :name, :user, :src)");
+        $thumb = new ThumbalizrController();
         $stmt->bindValue(':href', $href);
         $stmt->bindValue(':title', $title);
         $stmt->bindValue(':target', $target);
         $stmt->bindValue(':name', $name);
         $stmt->bindValue(':user', $user_fk);
+        $stmt->bindValue(':src', $thumb->thumbalizr($href));
 
         return $stmt->execute();
     }
@@ -71,7 +74,7 @@ class LinksManager
 
         if($stmt->execute() && $linkDatas = $stmt->fetchAll()) {
             foreach ($linkDatas as $linkData) {
-                $array[] = new Links($linkData['id'], $linkData['href'], $linkData['title'], $linkData['target'], $linkData['name'], $linkData['user_fk'], $linkData['click']);
+                $array[] = new Links($linkData['id'], $linkData['href'], $linkData['title'], $linkData['target'], $linkData['name'], $linkData['user_fk'], $linkData['click'], $linkData['src']);
             }
         }
         return $array;
@@ -79,13 +82,15 @@ class LinksManager
 
     public function editLink($href, $title, $target, $name, $linkId) :bool
     {
-        $stmt = Database::getInstance()->prepare("UPDATE prefix_link SET href = :href AND title = :title AND target = :target AND name = :name 
+        $stmt = Database::getInstance()->prepare("UPDATE prefix_link SET href = :href AND title = :title AND target = :target AND name = :name AND src = :src
                                                     WHERE id = :linkId");
+        $thumb = new ThumbalizrController();
         $stmt->bindValue(":href", $href);
         $stmt->bindValue(":title", $title);
         $stmt->bindValue(":target", $target);
         $stmt->bindValue(":name", $name);
         $stmt->bindValue(":linkId", $linkId);
+        $stmt->bindValue(":src", $thumb->thumbalizr($href));
 
         return $stmt->execute();
     }
@@ -94,6 +99,14 @@ class LinksManager
     {
         $stmt = Database::getInstance()->prepare("UPDATE prefix_link SET click = :click WHERE id = :linkId");
         $stmt->bindValue(":click", $click);
+        $stmt->bindValue(":linkId", $linkId);
+
+        return $stmt->execute();
+    }
+
+    public function getOneLink($linkId) :bool
+    {
+        $stmt = Database::getInstance()->prepare("SELECT * FROM prefix_link WHERE id = :linkId");
         $stmt->bindValue(":linkId", $linkId);
 
         return $stmt->execute();

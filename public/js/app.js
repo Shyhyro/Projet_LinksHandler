@@ -1,3 +1,4 @@
+
 // add link
 let addLinkButton = document.getElementById('link-add-button');
 let BackLink = document.getElementById('back_link');
@@ -29,10 +30,9 @@ function linkActualisation () {
         for(let link of links) {
             div.innerHTML += `
                 <div class="linkImage">
-                    <div class="image"><img src="/document/placeholder.png" alt="Placeholder, image temporaire."></div>
+                    <div class="image"><img src="${link.src}" alt="Screenshot du site."></div>
                     <a href="${link.href}" class="linkClick linkName" data-link="${link.id}" data-click="${link.click}" target="${link.target}">${link.title}</a>
                     <a class="delete" href="#"><i class="fas fa-trash deleteButton" data-link="${link.id}"></i></a>
-                    <!--<span class="edit"><i class="fas fa-pen-square"></i></span>-->
                 </div>
             `
         }
