@@ -6,11 +6,6 @@ let linkAddForm = document.getElementById('link-add-form');
 let form = document.querySelector('#link-add-form form');
 let submitButton = form.querySelector('button[type="submit"]');
 
-
-let linkUpdateForm = document.getElementById("link-update-form");
-let BackUpdateLink = document.getElementById('back_update_link');
-linkUpdateForm.style.display = "none";
-
 // Event Hide and Seek
 // Add link
 addLinkButton.addEventListener('click', function ()
@@ -38,11 +33,9 @@ function linkActualisation () {
                     <div class="image"><img src="${link.src}" alt="Screenshot du site."></div>
                     <a href="${link.href}" class="linkClick linkName" data-link="${link.id}" data-click="${link.click}" target="${link.target}">${link.title}</a>
                     <a class="delete" href="#"><i class="fas fa-trash deleteButton" data-link="${link.id}"></i></a>
-                    <a class="edit" href="#"><i data-link="${link.id}" class="fas fa-pen-square updateButton"></i></a>
                 </div>
             `
         }
-        //updateFormClick();
         clickUpdate();
         deleteLink();
     }
@@ -132,35 +125,3 @@ function clickUpdate()
         })
     })
 }
-
-/*
-function updateFormClick()
-{
-    let buttonUpdate = document.querySelectorAll(".updateButton");
-
-    buttonUpdate.forEach(function (e)
-    {
-        e.addEventListener('click', function ()
-        {
-            let xhr = new XMLHttpRequest();
-            xhr.responseType = "json";
-            xhr.open("SEARCH", "/api/links/index.php");
-            xhr.send(JSON.stringify({
-                id: e.dataset.link
-            }));
-
-            xhr.onload = function () {
-                let response = xhr.response;
-                let inputHref = document.getElementById("updateHref");
-                inputHref.value = response['href'];
-            }
-
-            linkUpdateForm.style.display = "flex";
-        });
-
-        BackUpdateLink.addEventListener('click', function ()
-        {
-            linkUpdateForm.style.display = "none";
-        });
-    })
-}*/

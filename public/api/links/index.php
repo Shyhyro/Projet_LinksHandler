@@ -27,9 +27,6 @@ switch($requestType)
     case 'PUT':
         updateClick(json_decode(file_get_contents("php://input")));
         break;
-    /*case 'SEARCH':
-        echo getOneLink($manager);
-        break;*/
     default:
         break;
 }
@@ -60,31 +57,6 @@ function getAll(LinksManager $manager): string
     }
     return json_encode($response);
 }
-
-/*
-function getOneLink(LinksManager $manager, $data): string
-{
-    $id = filter_var($data->id, FILTER_SANITIZE_NUMBER_INT);
-
-    $response = [];
-    // Obtention des links.
-    $data = $manager->getOneLink($id);
-    foreach($data as $link)
-    {
-        $response[] = [
-            'id' => $link->getId(),
-            'href'=> $link->getHref(),
-            'title' => $link->getTitle(),
-            'target' => $link->getTarget(),
-            'name' => $link->getName(),
-            'user' => $link->getUserFk(),
-            'click' => $link->getClick(),
-            'src' => $link->getSrc()
-        ];
-    }
-    return json_encode($response);
-}
-*/
 
 function addLink($data)
 {
